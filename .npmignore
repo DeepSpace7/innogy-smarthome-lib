@@ -1,0 +1,10 @@
+node_modules/
+src/
+test/
+dist/test/
+dist/dom/
+*.log
+*.tgz
+gulpfile.js
+tsconfig.json
+tslint.json

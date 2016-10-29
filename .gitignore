@@ -17,8 +17,8 @@
 .svn
 .CVS
 .idea
-node_modules
-build
+node_modules/
+dist/
 
 # Project specific
 *.js.map

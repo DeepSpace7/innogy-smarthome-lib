@@ -18,11 +18,26 @@ The library abstracts the RESTful Innogy SmartHome Client API in a platform inde
 
 ### Code Examples
 
+In the most trivial case one has all the credentials (for the client and for the user, e.g., the refresh token). Now let's consider that we want to connect to the user's SmartHome system and display all the received events in the browser's console. The following piece of code achieves
+
+```js
+var sh = createSmartHome(clientId, clientSecret);
+  
+sh.connect({
+  mode: 'refresh',
+  token: refreshToken
+}).on('message', function (ev) {
+  console.log(ev);
+});
+```
+
 (tbd)
 
 ## Developing
 
 The library itself is written in TypeScript to provide some flexibility regarding the usages. This allows us to safely define some interfaces that can then be consumed by developers. As a consequence the developer does not need to consult the Innogy SmartHome API documentation for some calls, but rather relies on the code completion provided by his/her favorite IDE (which needs to support TypeScript).
+
+As far as the version of TypeScript is concerned we limit the development to TypeScript v2 or higher. To be more specific, currently the following dependency is set in the *project.json*: `^2.0.3`. This will use the most recent major version, i.e., any v2 version of TypeScript that is at least v2.0.3 will be accepted.
 
 ### Compiling the Library
 
@@ -32,7 +47,7 @@ Be sure to start by resolving the dependencies of the project. We use `npm` to h
 npm install
 ```
 
-The library uses the [Gulp](http://gulpjs.com) task runner. By default the following command tries to build everything from scratch:
+The library uses the [Gulp](http://gulpjs.com) task runner. By default the following command tries to build everything from scratch (and additionally will try to run the unit tests):
 
 ```bash
 gulp
@@ -40,11 +55,48 @@ gulp
 
 Be sure to have a working installation of Gulp before running the previous command. Furthermore, more targets exist. Among these targets we find:
 
-* `compile-all` compiles everything
-* `compile-node` compiles the Node.js version
-* `compile-dom` compiles the browser version
-* `types` builds the type definition file
+* `build` compiles everything
+* `build-node` compiles the Node.js version
+* `build-dom` compiles the browser version
+* `clean` clears the *dist* directory
 * `test` compiles and runs the unit tests
+
+More specialized versions of the `clean` command exist, e.g., `clean-node`.
+
+### Unit Tests
+
+The unit tests use the Mocha framework with Chai as BDD / assertion library. A sample test may therefore looks as trivial as the following example:
+
+```ts
+const expect = require('chai').expect;
+
+describe('Calculator', () => {
+  var subject: Calculator;
+
+  beforeEach(() => {
+    subject = new Calculator();
+  });
+
+  describe('#add', () => {
+    it('should add two numbers together', () => {
+      const result = subject.add(2, 3);
+      expect(result).to.be.equal(5);
+    });
+  });
+});
+```
+
+In this simple snippet we are testing a pseudo `Calculator` class, which may be defined as follows.
+
+```ts
+class Calculator {
+  add(x: number, y: number): number {
+    return x + y;
+  }
+}
+```
+
+The code abstracts the HTTP requester and WebSocket listener. This allows to use a mock version that can be properly examined.
 
 ### Code Structure
 
@@ -76,6 +128,14 @@ The `interfaces` in the `src` directory are structured as follows:
 The latter distinguishes between SmartHome API entities (suffix `Entity`) and standard abstracted types, e.g., `Property` or `Link`. The abstracted types are not suffixed and may appear like standard JavaScript type annotations.
 
 ### Error Handling
+
+Correct error handling is quite crucial for this library. The SmartHome system exposes quite a few error codes and messages. Correct reaction once receiving these error codes is of crucial importance.
+
+As an example, the following error codes should be handled by trying to do an initialize once (and then failing):
+
+- 2012: "Session not found"
+- 5006: "Controller offline"
+- 5002: "Communication with the SHC failed"
 
 (tbd)
 

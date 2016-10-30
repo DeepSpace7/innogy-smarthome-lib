@@ -1,0 +1,24 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "lib": ["es5", "dom", "es2015.promise"],
+    "types": ["mocha", "node", "chai", "request", "ws"],
+    "declaration": false,
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "es5"
+  },
+  "include": [
+    "src/interfaces/*.ts",
+    "src/interfaces/entities/*.ts",
+    "src/interfaces/requests/*.ts",
+    "src/interfaces/responses/*.ts",
+    "src/utils/*.ts",
+    "src/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

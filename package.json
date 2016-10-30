@@ -1,0 +1,55 @@
+{
+  "name": "innogy-smarthome-lib",
+  "version": "0.1.0",
+  "description": "Node.js library to control the Innogy SmartHome client API.",
+  "main": "dist/node/index.js",
+  "types": "dist/node/SmartHome.d.ts",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "engines": {
+    "node": ">=0.10.3"
+  },
+  "repository": "PArns/innogy-smarthome-lib",
+  "keywords": [
+    "smarthome",
+    "iot",
+    "innogy",
+    "smart",
+    "home",
+    "integration",
+    "automation",
+    "devices",
+    "client",
+    "api",
+    "service",
+    "rwe",
+    "thermostat",
+    "sensor"
+  ],
+  "bugs": "https://github.com/PArns/innogy-smarthome-lib/issues",
+  "author": "Innogy",
+  "contributors": [
+    "Patrick Arns",
+    "Florian Rappl"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.41",
+    "@types/request": "0.0.31",
+    "@types/ws": "0.0.33",
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify": "0.0.12",
+    "gulp-mocha": "^3.0.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^3.0.2",
+    "merge2": "^1.0.2",
+    "mocha": "^3.1.0",
+    "typescript": "^2.0.3"
+  }
+}
